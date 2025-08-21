@@ -58,17 +58,18 @@ Based on the comparison table:
 
 | Model             | R-squared (R²) | RMSE    |
 |-------------------|----------------|---------|
-| Linear Regression | 0.673          | 4.894 |
-| Ridge Regression  | 0.673          | 4.897 |
+| Linear Regression | 0.67338          | 4.89409 |
+| Ridge Regression  | 0.67303          | 4.89675 |
 
-The **Ridge Regression** model performed slightly better than the Linear Regression model.
+In this execution, the **Linear Regression** model performed negligibly better than the Ridge Regression model, particularly when comparing RMSE.
 
--   **R-squared (R²):** The R² value for Ridge Regression (0.673) is marginally higher than for Linear Regression (0.673). R² represents the proportion of the variance in the dependent variable that is predictable from the independent variables. A higher R² indicates a better fit of the model to the data. The slight increase suggests that Ridge regularization accounts for a tiny bit more of the variance in median home values compared to the plain linear model.
--   **RMSE:** The RMSE for Ridge Regression (4.897) is slightly lower than for Linear Regression (4.894). RMSE (Root Mean Squared Error) measures the average magnitude of the errors. It tells us how concentrated the data is around the line of best fit. It penalizes large errors more heavily due to the squaring. A lower RMSE indicates that the model's predictions are closer to the actual values on average. The small reduction in RMSE suggests that Ridge regression has slightly better predictive accuracy and smaller typical prediction errors.
+-   **R-squared (R²):** The R² value for Linear Regression (0.67303) is marginally higher than for Ridge Regression (0.67338). R² represents the proportion of the variance in the dependent variable that is predictable from the independent variables. A higher R² indicates a better fit of the model to the data. This indicates that both models explain a very similar amount of variance in median home values.
+-   **RMSE:** The RMSE for Linear Regression (4.89675) is slightly lower than for Ridge Regression (4.89409). RMSE (Root Mean Squared Error) measures the average magnitude of the errors. It tells us how concentrated the data is around the line of best fit. It penalizes large errors more heavily due to the squaring. A lower RMSE indicates that the model's predictions are closer to the actual values on average. The small reduction in RMSE suggests that Linear Regression has slightly better predictive accuracy and smaller typical prediction errors in this instance.
 
-Did the Ridge regularization provide a significant improvement?
-While there is an improvement, it is **not a significant** improvement in this particular case. The R² and RMSE values are very close for both models. This could be due to several factors, such as the inherent linear nature of the relationships in this dataset, or that the multicollinearity (if present) is not severe enough for Ridge to show a dramatic advantage with the default alpha value. Ridge regression primarily helps when there's multicollinearity or a risk of overfitting; if these issues are not pronounced, its benefits might be subtle.
 
+In this specific scenario, **Ridge regularization did not provide a significant improvement; in fact, its performance was marginally worse than the Linear Regression model by RMSE.**
+The very close R² values and the slight increase in RMSE for Ridge suggest that for this dataset and chosen `alpha` value (1.0), the regularization did not yield a clear advantage. This might imply that multicollinearity is not a dominant issue, or the default regularization strength was not optimal for demonstrating a performance gain.
+In practical terms, for this specific run, the simpler Linear Regression model is slightly preferable given its marginally better RMSE.
 ## Assumption Interpretation
 
 Looking at the `residual_plot.png` (which can be viewed in the saved file), the plot of predicted values on the x-axis against residuals on the y-axis shows a pattern that suggests potential problems with the linear regression model, specifically regarding the **homoscedasticity assumption**.
@@ -89,11 +90,11 @@ To interpret the coefficients, we will use the Ridge Regression model as it perf
 **Feature with the largest positive coefficient:**
 The feature with the largest positive coefficient is **RM**.
 
-*   **Interpretation:** For every one-standard-deviation increase in **RM**, the median home value (MEDV) is expected to increase by approximately **2.995** thousand dollars, holding all other features constant. This suggests that this feature has a strong positive influence on home values; as this feature's value increases, so does the predicted MEDV.
+*   **Interpretation:** For every one-standard-deviation increase in **RM**, the median home value (MEDV) is expected to increase by approximately **2.99483** thousand dollars, holding all other features constant. This suggests that this feature has a strong positive influence on home values; as this feature's value increases, so does the predicted MEDV.
 
 **Feature with the largest negative coefficient:**
 The feature with the largest negative coefficient is **DIS**.
 
-*   **Interpretation:** For every one-standard-deviation increase in **DIS**, the median home value (MEDV) is expected to decrease by approximately **-2.944** thousand dollars, holding all other features constant. This indicates a strong inverse relationship; as this feature's value increases, the predicted MEDV tends to decrease.
+*   **Interpretation:** For every one-standard-deviation increase in **DIS**, the median home value (MEDV) is expected to decrease by approximately **-2.94401** thousand dollars, holding all other features constant. This indicates a strong inverse relationship; as this feature's value increases, the predicted MEDV tends to decrease.
 
 *(Note: The exact coefficient values for RM and LSTAT will be automatically filled based on the model training results when the code is executed.)*
